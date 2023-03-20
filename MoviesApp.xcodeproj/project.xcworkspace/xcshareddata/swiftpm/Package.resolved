@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "networking",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/usman-pucit/Networking",
+      "state" : {
+        "branch" : "main",
+        "revision" : "35639f99443de1ee0c296131f3eb1cb64bf39018"
+      }
+    }
+  ],
+  "version" : 2
+}
