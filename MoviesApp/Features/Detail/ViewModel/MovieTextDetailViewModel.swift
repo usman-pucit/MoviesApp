@@ -2,24 +2,21 @@
 //  MovieTextDetailViewModel.swift
 //  MoviesApp
 //
-//  Created by Muhammad Usman on 19/03/2023.
+//  Created by Muhammad Usman on 21/03/2023.
 //
 
 import Foundation
 
-final class MovieTextDetailViewModel: Identifiable {
-    enum TextDetailType {
-        case author(String, String)
-        case link(String, URL, String)
-        case description(String, String)
-        case source(String, String)
-    }
+// MARK: - ViewModel
 
-    let id: UUID
-    let type: TextDetailType
-
-    init(id: UUID = UUID(), type: TextDetailType) {
-        self.id = id
-        self.type = type
+final class MovieTextDetailViewModel: ObservableObject {
+    let title: String
+    let releaseYear: String
+    let description: String
+    
+    init(title: String, releaseYear: String, description: String) {
+        self.title = title
+        self.releaseYear = releaseYear
+        self.description = description
     }
 }

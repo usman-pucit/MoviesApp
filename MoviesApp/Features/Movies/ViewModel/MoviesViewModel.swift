@@ -25,17 +25,13 @@ final class MoviesViewModel: ObservableObject {
     }
 
     func getNextPageIfNecessary(movie: Movie) async {
-        if movieArray.last == movie && movies?.totalPages ?? 0 < movies?.page ?? 0 {
+        if movieArray.last == movie && movies?.totalPages ?? 0 > movies?.page ?? 0 {
             await fetchMovies(for: pageNumber + 1)
         }
     }
-
-    func displayLoadingIndicator(show: Bool) {
-        isLoading = show
-    }
     
-    func moviePosterImageUrl(path: String, imageWidth: Int = 500) -> URL? {
-        return URL(string: EnvironmentConfig.IMAGE_URL+"w\(imageWidth)\(path)")
+    func moviePosterImageUrl(path: String) -> URL? {
+        return URL(string: EnvironmentConfig.IMAGE_URL+"w500\(path)")
     }
     
     func prepareMoviesList(pages: Int, movies: Movies) -> [Movie] {
@@ -47,18 +43,18 @@ final class MoviesViewModel: ObservableObject {
     
     func fetchMovies(for page: Int = 1) async {
         // show loader
-        displayLoadingIndicator(show: true)
+        isLoading = true
         pageNumber = page
         
         do {
-            // hide loader
-            displayLoadingIndicator(show: false)
-            
             let fetchedMovies = try await repository.fetchMovies(page: page, language: nil, sortBy: nil)
+            
+            // hide loader
+            isLoading = false
             self.movies = fetchedMovies
             self.movieArray = prepareMoviesList(pages: page, movies: fetchedMovies)
         } catch {
-            displayLoadingIndicator(show: false)
+            isLoading = false
             alert = .init(title: "error_title".localized, message: error.localizedDescription)
         }
     }

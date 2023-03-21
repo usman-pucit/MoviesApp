@@ -28,4 +28,15 @@ extension Request {
                             path: "/3/discover/movie",
                             queryItems: parameters)
     }
+    
+    // details
+    static func details(with id: Int) -> Self {
+        let parameters: [URLQueryItem] = [
+            .init(name: "api_key", value: EnvironmentConfig.API_KEY)
+        ]
+        
+        return Request(baseURL: EnvironmentConfig.BASE_URL,
+                            path: "/3/movie/\(id)",
+                            queryItems: parameters)
+    }
 }

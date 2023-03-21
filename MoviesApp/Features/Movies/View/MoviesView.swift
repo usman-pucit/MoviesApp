@@ -16,14 +16,11 @@ struct MoviesView: View {
     var body: some View {
         NavigationView {
             LoadingView(isLoading: $viewModel.isLoading) {
-                VStack {
-                    // movies list
-                    MovieListView()
-                }
-                .environmentObject(viewModel)
+                MovieListView()
                 .navigationTitle("movies_navigation_title")
                 .background(Color.backgroundColor)
             }
+            .environmentObject(viewModel)
         }
         .errorAlertState(state: $viewModel.alert)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -45,27 +42,25 @@ private struct MovieListView: View {
     @EnvironmentObject var viewModel: MoviesViewModel
 
     var body: some View {
-        VStack {
-            List {
-                ForEach($viewModel.movieArray, id: \.id) { movie in
-                    MovieRowView(movie: movie)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .onAppear {
-                            Task {
-                                await viewModel.getNextPageIfNecessary(movie: movie.wrappedValue)
-                            }
+        List {
+            ForEach($viewModel.movieArray, id: \.id) { movie in
+                MovieRowView(movie: movie)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .onAppear {
+                        Task {
+                            await viewModel.getNextPageIfNecessary(movie: movie.wrappedValue)
                         }
-                        .overlay(NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movie: movie.wrappedValue)),
-                                                label: {
-                                                    EmptyView()
-                                                })
-                                                .isDetailLink(false)
-                                                .opacity(0))
-                }
+                    }
+                    .overlay(NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movieId: movie.id.wrappedValue)),
+                            label: {
+                                EmptyView()
+                            })
+                            .isDetailLink(false)
+                            .opacity(0))
             }
-            .listStyle(.plain)
         }
+        .listStyle(.plain)
     }
 }
 
@@ -76,8 +71,8 @@ private struct MovieRowView: View {
     @Binding var movie: Movie
 
     var body: some View {
-        HStack {
-            CacheAsyncImage(url: viewModel.moviePosterImageUrl(path: movie.poster)) { phase in
+        HStack(spacing: 12) {
+            CacheAsyncImage(url: viewModel.moviePosterImageUrl(path: movie.poster ?? "")) { phase in
                 if let image = phase.image {
                     image
                         .resizable()
@@ -89,20 +84,26 @@ private struct MovieRowView: View {
                 }
             }
 
-            VStack(alignment: .leading) {
-                Text(movie.title)
+            VStack(alignment: .leading, spacing: 10) {
+                Text(movie.originalTitle)
                     .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.systemTitleColor)
+                    .lineLimit(2)
+                
+                Text(movie.title)
+                    .font(.body)
                     .foregroundColor(Color.systemHeadlineColor)
-                    .lineLimit(nil)
+                    .lineLimit(2)
 
                 Spacer()
 
-                Text(movie.releaseDate.formattedDate)
+                Text(movie.releaseDate?.formattedDate() ?? "")
                     .font(.footnote)
                     .foregroundColor(Color.systemLightGrey)
                     .lineLimit(1)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
             Image(systemName: "chevron.compact.right")
                 .foregroundColor(Color.systemLightGrey)

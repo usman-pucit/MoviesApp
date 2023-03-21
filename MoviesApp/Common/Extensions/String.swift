@@ -7,13 +7,18 @@
 
 import Foundation
 
+enum DateFormate: String {
+    case eeee_mm_yyyy = "EEEE MM,yyyy"
+    case yyyy = "yyyy"
+}
+
 extension String {
-    var formattedDate: String {
+    func formattedDate(formate: DateFormate = .eeee_mm_yyyy) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.locale = Locale(identifier: "en_us")
         let date = dateFormatter.date(from: self)
-        dateFormatter.dateFormat = "dd.MM.yyyy"
+        dateFormatter.dateFormat = formate.rawValue
         guard let date = date else { return "" }
         let resultString = dateFormatter.string(from: date)
         return resultString

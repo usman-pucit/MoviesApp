@@ -18,10 +18,15 @@ struct MovieDetailView: View {
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 20) {
                     detailHeaderImageView(geometry: geometry)
-
-                    MovieTextDetailView(viewModel: viewModel)
+                    
+                    MovieTextDetailView(textDetail: $viewModel.textDetail)
+                        .padding()
+                    
                 }
             }
+        }
+        .task {
+            await viewModel.fetchMovieDetails()
         }
         .background(Color.backgroundColor.ignoresSafeArea(.all))
         .edgesIgnoringSafeArea(.top)
@@ -44,7 +49,7 @@ struct MovieDetailView: View {
     }
 
     private func detailHeaderImageView(geometry: GeometryProxy) -> some View {
-        CacheAsyncImage(url: URL(string: viewModel.movie.backdropPath)) { phase in
+        CacheAsyncImage(url: viewModel.backdropUrl) { phase in
             if let image = phase.image {
                 image
                     .resizable()
@@ -65,67 +70,26 @@ struct MovieDetailView: View {
     }
 }
 
-// MARK: - Movie detail
-
-private struct MovieTextDetailView: View {
-    @StateObject var viewModel: MovieDetailViewModel
-
+fileprivate struct MovieTextDetailView: View {
+    @Binding var textDetail: MovieTextDetailViewModel
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            ForEach(viewModel.movieTexts, id: \.id) { viewModel in
-                switch viewModel.type {
-                case let .description(imageName, title):
-                    descriptionRow(imageName: imageName, title: title)
-                case let .source(imageName, title):
-                    headlineRow(imageName: imageName, title: title)
-                case let .author(imageName, title):
-                    headlineRow(imageName: imageName, title: title)
-                case let .link(imageName, link, title):
-                    linkRow(link: link, imageName: imageName, title: title)
-                }
-            }
-        }
-        .padding()
-    }
-
-    private func descriptionRow(imageName: String, title: String) -> some View {
-        HStack(alignment: .top, spacing: 6) {
-            Image(imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 18, height: 18)
-
-            Text(title)
-                .font(.headline)
-                .fontWeight(.medium)
-                .foregroundColor(Color.black)
-                .multilineTextAlignment(.leading)
-        }
-        .padding(.bottom, 10)
-    }
-
-    private func headlineRow(imageName: String, title: String) -> some View {
-        HStack(alignment: .top, spacing: 6) {
-            Image(imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 18, height: 18)
-
-            Text(title)
-                .font(.subheadline)
-                .fontWeight(.regular)
+        VStack(alignment: .leading, spacing: 10) {
+            Text(textDetail.title)
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(Color.systemTitleColor)
+                
+            Text("\(textDetail.releaseYear)")
+                .font(.title3)
+                .fontWeight(.heavy)
+                .foregroundColor(Color.systemHeadlineColor)
+            
+            Text(textDetail.description)
+                .font(.body)
                 .foregroundColor(Color.systemLightGrey)
-        }
-    }
-
-    private func linkRow(link: URL, imageName: String, title _: String) -> some View {
-        HStack(alignment: .top, spacing: 6) {
-            Image(imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 18, height: 18)
-
-            Link("Link", destination: link)
+                .lineLimit(nil)
+                .padding(.top, 20)
         }
     }
 }
@@ -134,6 +98,6 @@ private struct MovieTextDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(viewModel: MovieDetailViewModel(movie: .init(adult: false, backdropPath: "", genreIds: [], id: 1, language: "", originalTitle: "", overview: "", popularity: 1, poster: "", releaseDate: "", title: "", video: false, voteAverage: 1, voteCount: 1)))
+        MovieDetailView(viewModel: MovieDetailViewModel(movieId: 943822))
     }
 }

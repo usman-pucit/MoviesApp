@@ -19,7 +19,7 @@ struct LoadingView<Content>: View where Content: View {
                     .blur(radius: self.isLoading ? 3 : 0)
 
                 ProgressView()
-                    .tint(Color.systemDarkBlue)
+                    .tint(Color.systemTitleColor)
                     .opacity(self.isLoading ? 1 : 0)
             }
         }
