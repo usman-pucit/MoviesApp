@@ -16,8 +16,8 @@ final class NetworkServiceMock<T: Decodable>: NetworkServiceProvider {
         self.request = request
         self.requestResult = requestResult
     }
-    
-    func execute<T>(request: Request) async throws -> T where T : Decodable {
+
+    func execute<T>(request: Request) async throws -> T where T: Decodable {
         self.request = request
 
         switch requestResult {

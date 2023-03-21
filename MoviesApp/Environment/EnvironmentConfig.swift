@@ -40,7 +40,7 @@ public enum EnvironmentConfig {
         }
         return key
     }()
-    
+
     static let IMAGE_URL: String = {
         guard let key = EnvironmentConfig.infoDictionary[Keys.Plist.IMAGE_URL] as? String else {
             fatalError("TMDB_API_KEY not found")

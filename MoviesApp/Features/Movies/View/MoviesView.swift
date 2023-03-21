@@ -17,8 +17,8 @@ struct MoviesView: View {
         NavigationView {
             LoadingView(isLoading: $viewModel.isLoading) {
                 MovieListView()
-                .navigationTitle("movies_navigation_title")
-                .background(Color.backgroundColor)
+                    .navigationTitle("movies_navigation_title")
+                    .background(Color.backgroundColor)
             }
             .environmentObject(viewModel)
         }
@@ -53,11 +53,11 @@ private struct MovieListView: View {
                         }
                     }
                     .overlay(NavigationLink(destination: MovieDetailView(viewModel: MovieDetailViewModel(movieId: movie.id.wrappedValue)),
-                            label: {
-                                EmptyView()
-                            })
-                            .isDetailLink(false)
-                            .opacity(0))
+                                            label: {
+                                                EmptyView()
+                                            })
+                                            .isDetailLink(false)
+                                            .opacity(0))
             }
         }
         .listStyle(.plain)
@@ -91,7 +91,7 @@ private struct MovieRowView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.systemTitleColor)
                     .lineLimit(2)
-                
+
                 Text(movie.title)
                     .font(.body)
                     .foregroundColor(Color.systemHeadlineColor)

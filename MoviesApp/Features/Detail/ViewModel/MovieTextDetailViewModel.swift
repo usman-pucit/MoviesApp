@@ -13,7 +13,7 @@ final class MovieTextDetailViewModel {
     let title: String
     let releaseYear: String
     let description: String
-    
+
     init(title: String, releaseYear: String, description: String) {
         self.title = title
         self.releaseYear = releaseYear

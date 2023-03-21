@@ -29,7 +29,7 @@ extension RemoteMoviesRepository: MoviesRepositoryType {
     func fetchMovies(page: Int, language: String?, sortBy: String?) async throws -> Movies {
         try await service.execute(request: .movies(page: page, language: language, sortBy: sortBy))
     }
-    
+
     func fetchMovieDetails(with id: Int) async throws -> Detail {
         try await service.execute(request: .details(with: id))
     }

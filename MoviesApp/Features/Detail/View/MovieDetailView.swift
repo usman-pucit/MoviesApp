@@ -18,10 +18,9 @@ struct MovieDetailView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
                     detailHeaderImageView(geometry: geometry)
-                    
+
                     MovieTextDetailView(textDetail: $viewModel.textDetail)
                         .padding()
-                    
                 }
             }
         }
@@ -68,21 +67,21 @@ struct MovieDetailView: View {
     }
 }
 
-fileprivate struct MovieTextDetailView: View {
+private struct MovieTextDetailView: View {
     @Binding var textDetail: MovieTextDetailViewModel
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(textDetail.title)
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(Color.systemTitleColor)
-                
+
             Text("\(textDetail.releaseYear)")
                 .font(.title3)
                 .fontWeight(.heavy)
                 .foregroundColor(Color.systemHeadlineColor)
-            
+
             Text(textDetail.description)
                 .font(.body)
                 .foregroundColor(Color.systemLightGrey)
@@ -96,6 +95,6 @@ fileprivate struct MovieTextDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(viewModel: MovieDetailViewModel(movieId: 943822))
+        MovieDetailView(viewModel: MovieDetailViewModel(movieId: 943_822))
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 extension Array {
-    func repeated(count: Int) -> Array<Element> {
+    func repeated(count: Int) -> [Element] {
         assert(count > 0, "count must be greater than 0")
         var result = self
         for _ in 0 ..< count - 1 {

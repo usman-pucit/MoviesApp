@@ -9,10 +9,10 @@ import Foundation
 
 extension Movies {
     static func mock(page: Int = 1,
-                      totalPages: Int = 5,
-                      totalResults: Int = 50,
-                     results: [Movie] = [.mock(), .mock()]) -> Movies {
-        
+                     totalPages: Int = 5,
+                     totalResults: Int = 50,
+                     results: [Movie] = [.mock(), .mock()]) -> Movies
+    {
         return .init(page: page,
                      totalPages: totalPages,
                      totalResults: totalResults,
@@ -25,8 +25,8 @@ extension Movie {
                      originalTitle: String = "mock.movie.original.title",
                      poster: String? = "mock.movie.poster",
                      releaseDate: String? = "01.01.2023",
-                     title: String = "mock.movie.title") -> Movie {
-        
+                     title: String = "mock.movie.title") -> Movie
+    {
         return .init(id: id,
                      originalTitle: originalTitle,
                      poster: poster,
@@ -40,8 +40,8 @@ extension Detail {
                      id: Int = 1,
                      overview: String = "mock.detail.overview",
                      releaseDate: String? = "01.02.2023",
-                     title: String = "mock.detail.title") -> Detail {
-        
+                     title: String = "mock.detail.title") -> Detail
+    {
         return Detail(backdropPath: backdropPath,
                       id: id,
                       overview: overview,

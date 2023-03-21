@@ -9,7 +9,7 @@ import Foundation
 
 enum DateFormate: String {
     case eeee_mm_yyyy = "EEEE MM,yyyy"
-    case yyyy = "yyyy"
+    case yyyy
 }
 
 extension String {

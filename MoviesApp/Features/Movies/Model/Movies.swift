@@ -19,18 +19,18 @@ struct Movies: Decodable, Equatable {
         case totalResults = "total_results"
         case results
     }
-    
+
     static func == (lhs: Movies, rhs: Movies) -> Bool {
         lhs.page == rhs.page && lhs.totalPages == rhs.totalPages && lhs.totalResults == rhs.totalResults && lhs.results == rhs.results
     }
 }
 
 struct Movie: Decodable, Equatable {
-    var id : Int
-    let originalTitle : String
-    let poster : String?
-    let releaseDate : String?
-    let title : String
+    var id: Int
+    let originalTitle: String
+    let poster: String?
+    let releaseDate: String?
+    let title: String
 
     enum CodingKeys: String, CodingKey {
         case id
