@@ -40,3 +40,9 @@ extension Request {
                             queryItems: parameters)
     }
 }
+
+extension Request: Equatable {
+    public static func == (lhs: Request, rhs: Request) -> Bool {
+        return lhs.scheme == rhs.scheme && lhs.path == rhs.path && lhs.queryItems == rhs.queryItems && lhs.baseURL == rhs.baseURL
+    }
+}

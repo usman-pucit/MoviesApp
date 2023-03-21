@@ -25,7 +25,7 @@ final class MoviesViewModel: ObservableObject {
     }
 
     func getNextPageIfNecessary(movie: Movie) async {
-        if movieArray.last == movie && movies?.totalPages ?? 0 > movies?.page ?? 0 {
+        if movieArray.last == movie && movies?.totalResults ?? 0 > movieArray.count {
             await fetchMovies(for: pageNumber + 1)
         }
     }

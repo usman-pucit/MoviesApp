@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movies: Decodable {
+struct Movies: Decodable, Equatable {
     let page: Int
     let totalPages: Int
     let totalResults: Int
@@ -18,6 +18,10 @@ struct Movies: Decodable {
         case totalPages = "total_pages"
         case totalResults = "total_results"
         case results
+    }
+    
+    static func == (lhs: Movies, rhs: Movies) -> Bool {
+        lhs.page == rhs.page && lhs.totalPages == rhs.totalPages && lhs.totalResults == rhs.totalResults && lhs.results == rhs.results
     }
 }
 
