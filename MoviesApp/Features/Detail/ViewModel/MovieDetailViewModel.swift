@@ -39,7 +39,6 @@ final class MovieDetailViewModel: ObservableObject {
         do {
             let fetchedDetail = try await repository.fetchMovieDetails(with: movieId)
             
-            // hide loader
             isLoading = false
             detail = fetchedDetail
             backdropUrl = movieBackdropImageUrl(with: detail?.backdropPath ?? "")

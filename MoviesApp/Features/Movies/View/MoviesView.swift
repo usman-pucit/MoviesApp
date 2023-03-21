@@ -76,13 +76,14 @@ private struct MovieRowView: View {
                 if let image = phase.image {
                     image
                         .resizable()
-                        .frame(maxWidth: 100, maxHeight: .infinity)
+                        .scaledToFit()
                 } else {
                     Image("poster")
                         .resizable()
-                        .frame(maxWidth: 100, maxHeight: .infinity)
+                        .scaledToFit()
                 }
             }
+            .frame(maxWidth: 100, maxHeight: .infinity)
 
             VStack(alignment: .leading, spacing: 10) {
                 Text(movie.originalTitle)

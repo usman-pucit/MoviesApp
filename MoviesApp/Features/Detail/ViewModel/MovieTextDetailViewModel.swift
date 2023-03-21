@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ViewModel
 
-final class MovieTextDetailViewModel: ObservableObject {
+final class MovieTextDetailViewModel {
     let title: String
     let releaseYear: String
     let description: String

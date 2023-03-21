@@ -15,7 +15,7 @@ struct MovieDetailView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
                     detailHeaderImageView(geometry: geometry)
                     
@@ -30,8 +30,6 @@ struct MovieDetailView: View {
         }
         .background(Color.backgroundColor.ignoresSafeArea(.all))
         .edgesIgnoringSafeArea(.top)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButtonView)
     }
@@ -53,14 +51,14 @@ struct MovieDetailView: View {
             if let image = phase.image {
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .scaledToFill()
             } else {
                 Image("poster")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .scaledToFill()
             }
         }
-        .frame(width: geometry.size.width, height: geometry.size.height / 1.5)
+        .frame(width: geometry.size.width, height: geometry.size.height / 1.75)
     }
 
     // MARK: - Public API

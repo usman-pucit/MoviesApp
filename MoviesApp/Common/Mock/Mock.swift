@@ -7,35 +7,45 @@
 
 import Foundation
 
+extension Movies {
+    static func mock(page: Int = 1,
+                      totalPages: Int = 5,
+                      totalResults: Int = 50,
+                     results: [Movie] = [.mock()]) -> Movies {
+        
+        return .init(page: page,
+                     totalPages: totalPages,
+                     totalResults: totalResults,
+                     results: results)
+    }
+}
+
 extension Movie {
-    static func mock(adult: Bool = false,
-                     backdropPath: String? = "",
-                     genreIds: [Int] = [],
-                     id: Int = 1,
-                     language: String = "en",
+    static func mock(id: Int = 1,
                      originalTitle: String = "title",
-                     overview: String = "overview",
-                     popularity: Double = 1,
                      poster: String? = "",
                      releaseDate: String? = "",
-                     title: String = "title",
-                     video: Bool = false,
-                     voteAverage: Double = 1,
-                     voteCount: Int = 1) -> Movie {
+                     title: String = "title") -> Movie {
         
-        return .init(adult: adult,
-                     backdropPath: backdropPath,
-                     genreIds: genreIds,
-                     id: id,
-                     language: language,
+        return .init(id: id,
                      originalTitle: originalTitle,
-                     overview: overview,
-                     popularity: popularity,
                      poster: poster,
                      releaseDate: releaseDate,
-                     title: title,
-                     video: video,
-                     voteAverage: voteAverage,
-                     voteCount: voteCount)
+                     title: title)
+    }
+}
+
+extension Detail {
+    static func mock(backdropPath: String? = "",
+                     id: Int = 1,
+                     overview: String = "",
+                     releaseDate: String? = "",
+                     title: String = "") -> Detail {
+        
+        return Detail(backdropPath: backdropPath,
+                      id: id,
+                      overview: overview,
+                      releaseDate: releaseDate,
+                      title: title)
     }
 }
