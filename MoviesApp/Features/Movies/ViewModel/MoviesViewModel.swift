@@ -20,7 +20,7 @@ final class MoviesViewModel: ObservableObject {
 
     // MARK: Public API
 
-    init(repository: MoviesRepositoryType = MoviesRepository()) {
+    init(repository: MoviesRepositoryType = RemoteMoviesRepository()) {
         self.repository = repository
     }
 

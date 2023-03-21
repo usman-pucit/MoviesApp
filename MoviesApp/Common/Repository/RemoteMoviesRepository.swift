@@ -1,5 +1,5 @@
 //
-//  MoviesRepository.swift
+//  RemoteMoviesRepository.swift
 //  PlandayAssessment
 //
 //  Created by Muhammad Usman on 04/03/2023.
@@ -15,8 +15,8 @@ protocol MoviesRepositoryType {
     func fetchMovieDetails(with id: Int) async throws -> Detail
 }
 
-class MoviesRepository {
-    let service: NetworkServiceProvider
+class RemoteMoviesRepository {
+    private let service: NetworkServiceProvider
 
     init(service: NetworkServiceProvider = NetworkService()) {
         self.service = service
@@ -25,7 +25,7 @@ class MoviesRepository {
 
 // MARK: - Extension
 
-extension MoviesRepository: MoviesRepositoryType {
+extension RemoteMoviesRepository: MoviesRepositoryType {
     func fetchMovies(page: Int, language: String?, sortBy: String?) async throws -> Movies {
         try await service.execute(request: .movies(page: page, language: language, sortBy: sortBy))
     }

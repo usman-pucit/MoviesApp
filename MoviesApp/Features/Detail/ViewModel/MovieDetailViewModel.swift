@@ -24,7 +24,7 @@ final class MovieDetailViewModel: ObservableObject {
     
     // MARK: - Public API
 
-    init(movieId: Int, repository: MoviesRepositoryType = MoviesRepository()) {
+    init(movieId: Int, repository: MoviesRepositoryType = RemoteMoviesRepository()) {
         self.movieId = movieId
         self.repository = repository
     }

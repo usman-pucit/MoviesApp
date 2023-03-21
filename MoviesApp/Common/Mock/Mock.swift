@@ -11,7 +11,7 @@ extension Movies {
     static func mock(page: Int = 1,
                       totalPages: Int = 5,
                       totalResults: Int = 50,
-                     results: [Movie] = [.mock()]) -> Movies {
+                     results: [Movie] = [.mock(), .mock()]) -> Movies {
         
         return .init(page: page,
                      totalPages: totalPages,
@@ -22,10 +22,10 @@ extension Movies {
 
 extension Movie {
     static func mock(id: Int = 1,
-                     originalTitle: String = "title",
-                     poster: String? = "",
-                     releaseDate: String? = "",
-                     title: String = "title") -> Movie {
+                     originalTitle: String = "mock.movie.original.title",
+                     poster: String? = "mock.movie.poster",
+                     releaseDate: String? = "01.01.2023",
+                     title: String = "mock.movie.title") -> Movie {
         
         return .init(id: id,
                      originalTitle: originalTitle,
@@ -36,11 +36,11 @@ extension Movie {
 }
 
 extension Detail {
-    static func mock(backdropPath: String? = "",
+    static func mock(backdropPath: String? = "mock.backdrop.path",
                      id: Int = 1,
-                     overview: String = "",
-                     releaseDate: String? = "",
-                     title: String = "") -> Detail {
+                     overview: String = "mock.detail.overview",
+                     releaseDate: String? = "01.02.2023",
+                     title: String = "mock.detail.title") -> Detail {
         
         return Detail(backdropPath: backdropPath,
                       id: id,
