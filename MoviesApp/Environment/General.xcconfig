@@ -1,0 +1,10 @@
+//
+//  General.xcconfig
+//  MoviesApp
+//
+//  Created by Muhammad Usman on 17/03/2023.
+//
+
+BASE_URL = api.themoviedb.org
+IMAGE_URL = https:/$()/image.tmdb.org/t/p/
+API_KEY = c9856d0cb57c3f14bf75bdc6c063b8f3
