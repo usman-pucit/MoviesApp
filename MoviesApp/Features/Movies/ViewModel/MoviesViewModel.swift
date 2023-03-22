@@ -14,7 +14,6 @@ final class MoviesViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var movieArray: [Movie] = []
     @Published var alert: AlertState?
-
     private(set) var movies: Movies?
     private var repository: MoviesRepositoryType
     private var pageNumber = 1

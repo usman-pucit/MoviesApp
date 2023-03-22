@@ -13,11 +13,11 @@ import Foundation
 final class MovieDetailViewModel: ObservableObject {
     // MARK: - Properties
 
+    @Published private(set) var alert: AlertState?
+    @Published private(set) var detail: Detail?
+    @Published private(set) var backdropUrl: URL?
     @Published var isLoading: Bool = false
-    @Published var alert: AlertState?
-    @Published var detail: Detail?
-    @Published var backdropUrl: URL?
-    @Published var textDetail: MovieTextDetailViewModel = .init(title: "", releaseYear: "", description: "")
+    @Published var textDetailViewModel: MovieTextDetailViewModel = .init(title: "", releaseYear: "", description: "")
 
     private var movieId: Int
     private var repository: MoviesRepositoryType
@@ -42,7 +42,7 @@ final class MovieDetailViewModel: ObservableObject {
             isLoading = false
             detail = fetchedDetail
             backdropUrl = movieBackdropImageUrl(with: detail?.backdropPath ?? "")
-            textDetail = makeMovieTextDetailViewModel(with: fetchedDetail)
+            textDetailViewModel = makeMovieTextDetailViewModel(with: fetchedDetail)
         } catch {
             isLoading = false
             alert = .init(title: "error_title".localized, message: error.localizedDescription)

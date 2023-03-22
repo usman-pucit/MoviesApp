@@ -1,8 +1,8 @@
 //
 //  LoadingView.swift
-//  PlandayAssessment
+//  MoviesApp
 //
-//  Created by Muhammad Usman on 05/03/2023.
+//  Created by Muhammad Usman on 19/03/2023.
 //
 
 import SwiftUI

@@ -17,10 +17,13 @@ struct MoviesView: View {
         NavigationView {
             LoadingView(isLoading: $viewModel.isLoading) {
                 MovieListView()
-                    .navigationTitle("movies_navigation_title")
-                    .background(Color.backgroundColor)
             }
             .environmentObject(viewModel)
+            .navigationTitle("movies_navigation_title")
+            .background(Color.backgroundColor)
+            .refreshable {
+                await viewModel.fetchMovies()
+            }
         }
         .errorAlertState(state: $viewModel.alert)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

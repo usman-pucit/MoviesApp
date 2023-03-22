@@ -15,12 +15,14 @@ struct MovieDetailView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 20) {
-                    detailHeaderImageView(geometry: geometry)
+            LoadingView(isLoading: $viewModel.isLoading) {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        detailHeaderImageView(geometry: geometry)
 
-                    MovieTextDetailView(textDetail: $viewModel.textDetail)
-                        .padding()
+                        MovieTextDetailView(textDetail: $viewModel.textDetailViewModel)
+                            .padding()
+                    }
                 }
             }
         }
@@ -77,7 +79,7 @@ private struct MovieTextDetailView: View {
                 .fontWeight(.black)
                 .foregroundColor(Color.systemTitleColor)
 
-            Text("\(textDetail.releaseYear)")
+            Text(textDetail.releaseYear)
                 .font(.title3)
                 .fontWeight(.heavy)
                 .foregroundColor(Color.systemHeadlineColor)

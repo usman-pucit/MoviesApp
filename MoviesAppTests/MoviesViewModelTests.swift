@@ -1,8 +1,8 @@
 //
-//  MoviesAppTests.swift
+//  MoviesViewModelTests.swift
 //  MoviesAppTests
 //
-//  Created by Muhammad Usman on 17/03/2023.
+//  Created by Muhammad Usman on 21/03/2023.
 //
 
 @testable import MoviesApp
@@ -140,7 +140,7 @@ final class MoviesViewModelTests: XCTestCase {
         XCTAssertEqual(movieArray3.count, 9)
     }
 
-    // test
+    // test 5.
     func testMoviePosterUrl_withPath_expectUrl() async {
         // Given
         let service = NetworkServiceMock<Movies>(requestResult: .success(.mock(results: [.mock(poster: "/mock.poster.url")])))
